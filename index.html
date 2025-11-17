@@ -12,7 +12,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   </head>
   <body class="bg-[#8758ff] flex justify-center items-center">
-    <div class="app bg-[#1a1a40] w-[580px] mt-[5rem] rounded-[5px] p-10">
+    <div class="app bg-[#1a1a40] w-[540px] mt-[5rem] rounded-[5px] p-10">
       <h1 class="text-[#fff] font-semibold text-4xl text-center mb-5">
         Get Things Done !
       </h1>
@@ -24,9 +24,10 @@
         <input
           type="text"
           id="todo-input"
-          class="input w-full text-lg border-none outline-none"
+          class="input w-full text-lg border-none outline-none text-[16px]"
           spellcheck="false"
           placeholder="What is the task today?"
+          autocomplete="off"
         />
         <button
           id="submit"
