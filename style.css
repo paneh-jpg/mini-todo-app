@@ -1,3 +1,12 @@
+h1 {
+  font-family: "Poppins", sans-serif;
+}
+
+/* ul li,
+input {
+  font-family: "Montserrat", sans-serif;
+} */
+
 .completed span {
   text-decoration: line-through;
   opacity: 0.6;
@@ -8,7 +17,7 @@
   padding: 10px;
   font-size: 16px;
   background: #1e1e3f;
-  border: 1px solid #8758ff; /* ✔ đúng màu và độ dày */
+  border: 1px solid #8758ff;
   border-radius: 8px;
   color: #fff;
   outline: none;
