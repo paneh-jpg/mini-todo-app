@@ -28,25 +28,60 @@ function handleTaskActions(e) {
   const task = tasks[taskIndex];
 
   if (e.target.closest("#edit")) {
-    let newTitle = prompt("Enter the new task title:", task.title);
-    if (newTitle === null) return;
+    const originalItem = e.target.closest("#task-item");
+    const taskIndex = +originalItem.dataset.index;
+    const task = tasks[taskIndex];
 
-    newTitle = newTitle.trim();
+    const formEdit = document.createElement("form");
+    formEdit.className =
+      "flex text-[#ffffffc6] -m-4 border border-[#8758ff] rounded pl-4 w-full  bg-[#1a1a40] ";
 
-    if (!newTitle) {
-      alert("Task title cannot be empty");
-      return;
-    }
-    const safeNewTitle = escapeHTML(newTitle);
-    if (isDuplicateTask(safeNewTitle, taskIndex)) {
-      alert("Task is available");
-      return;
-    }
-    task.title = safeNewTitle;
-    renderTasks();
-    saveTasks();
+    const inputEdit = document.createElement("input");
+    inputEdit.type = "text";
+    inputEdit.className =
+      "input w-full text-lg border-none outline-none text-[16px] bg-[#1a1a40]";
+    inputEdit.value = task.title;
+    inputEdit.autocomplete = "off";
+    inputEdit.spellcheck = false;
+
+    const saveBtn = document.createElement("button");
+    saveBtn.type = "submit";
+    saveBtn.className =
+      "cursor-pointer select-none w-[97.52px] shrink-0 ml-auto bg-[#8758ff] font-semibold text-lg px-1 py-2.5 -mr-7";
+    saveBtn.textContent = "Add Task";
+
+    originalItem.innerHTML = "";
+    originalItem.appendChild(formEdit);
+
+    formEdit.appendChild(inputEdit);
+    formEdit.appendChild(saveBtn);
+
+    inputEdit.focus();
+
+    formEdit.addEventListener("submit", (ev) => {
+      ev.preventDefault();
+
+      let newTitle = inputEdit.value.trim();
+      if (!newTitle) {
+        alert("Task title cannot be empty");
+        return;
+      }
+
+      const safeNewTitle = escapeHTML(newTitle);
+
+      if (isDuplicateTask(safeNewTitle, taskIndex)) {
+        alert("Task is available");
+        return;
+      }
+
+      task.title = safeNewTitle;
+      saveTasks();
+      renderTasks();
+    });
+
     return;
   }
+
   if (e.target.closest("#delete")) {
     if (confirm(`Are you sure you want to delete ${task.title}`)) {
       tasks.splice(taskIndex, 1);
