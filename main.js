@@ -39,7 +39,7 @@ function handleTaskActions(e) {
     const inputEdit = document.createElement("input");
     inputEdit.type = "text";
     inputEdit.className =
-      "input w-full text-lg border-none outline-none text-[16px] bg-[#1a1a40]";
+      "input w-full text-lg border-none outline-none text-[16px] bg-[#1a1a40] mr-4";
     inputEdit.value = task.title;
     inputEdit.autocomplete = "off";
     inputEdit.spellcheck = false;
@@ -135,7 +135,7 @@ function renderTasks() {
             task.completed ? "completed" : ""
           } flex justify-between p-4 bg-[#8758ff] text-[#fff] text-lg rounded mt-4"
         >
-          <span id="task-title" class="title cursor-pointer">${escapeHTML(
+          <span id="task-title" class="title cursor-pointer break-word mr-4">${escapeHTML(
             task.title
           )}</span>
           <div class="task-action flex gap-3">
