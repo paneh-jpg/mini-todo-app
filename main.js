@@ -47,7 +47,7 @@ function handleTaskActions(e) {
     const saveBtn = document.createElement("button");
     saveBtn.type = "submit";
     saveBtn.className =
-      "cursor-pointer select-none w-[97.52px] shrink-0 ml-auto bg-[#8758ff] font-semibold text-lg px-1 py-2.5 -mr-7";
+      "cursor-pointer select-none w-[97.52px] shrink-0 ml-auto bg-[#8758ff] font-semibold text-lg px-1 py-3 -mr-8";
     saveBtn.textContent = "Add Task";
 
     originalItem.innerHTML = "";
