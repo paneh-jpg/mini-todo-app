@@ -138,7 +138,7 @@ function renderTasks() {
           data-index=${index} 
           class="${
             task.completed ? "completed" : ""
-          } flex justify-between p-4 bg-[#8758ff] text-[#fff] text-lg rounded mt-4"
+          } flex w-full justify-between p-4 bg-[#8758ff] text-[#fff] text-lg rounded mt-4"
         >
           <span id="task-title" class="title cursor-pointer break-word mr-4">${escapeHTML(
             task.title
