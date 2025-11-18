@@ -32,6 +32,11 @@ function handleTaskActions(e) {
     const taskIndex = +originalItem.dataset.index;
     const task = tasks[taskIndex];
 
+    if (task.completed) {
+      alert("This task has already been completed and cannot be edited.");
+      return;
+    }
+
     const formEdit = document.createElement("form");
     formEdit.className =
       "flex text-[#ffffffc6] -m-4 border border-[#8758ff] rounded pl-4 w-full  bg-[#1a1a40] ";
@@ -83,7 +88,7 @@ function handleTaskActions(e) {
   }
 
   if (e.target.closest("#delete")) {
-    if (confirm(`Are you sure you want to delete ${task.title}`)) {
+    if (confirm(`Are you sure you want to delete: ${task.title}`)) {
       tasks.splice(taskIndex, 1);
       renderTasks();
       saveTasks();
