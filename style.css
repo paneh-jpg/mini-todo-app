@@ -2,23 +2,20 @@ h1 {
   font-family: "Poppins", sans-serif;
 }
 
-/* ul li,
-input {
-  font-family: "Montserrat", sans-serif;
-} */
+button {
+  cursor: pointer;
+}
 
 .completed span {
   text-decoration: line-through;
   opacity: 0.6;
 }
 
-.edit-input {
-  flex: 1;
-  padding: 10px;
-  font-size: 16px;
-  background: #1e1e3f;
-  border: 1px solid #8758ff;
-  border-radius: 8px;
-  color: #fff;
-  outline: none;
+.deleted {
+  opacity: 0;
+  height: 0;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  transition: all 0.3s ease;
 }
