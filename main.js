@@ -40,8 +40,8 @@ function handleTaskActions(e) {
   const taskItem = e.target.closest(".task-item");
   if (!taskItem) return;
 
-  const taskIndex = +taskItem.dataset.index;
-  const task = tasks[taskIndex];
+  let taskIndex = Number(taskItem.dataset.index);
+  let task = tasks[taskIndex];
 
   if (e.target.closest(".edit")) {
     const form = document.createElement("form");
@@ -69,8 +69,8 @@ function handleTaskActions(e) {
 
     input.focus();
 
-    form.addEventListener("submit", (ev) => {
-      ev.preventDefault();
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
 
       const newTitle = input.value.trim();
       if (!newTitle) {
@@ -78,16 +78,19 @@ function handleTaskActions(e) {
         return;
       }
 
-      if (isDuplicateTask(newTitle, taskIndex)) {
+      const currentIndex = Number(taskItem.dataset.index);
+
+      if (isDuplicateTask(newTitle, currentIndex)) {
         alert("Task is available");
         return;
       }
 
-      task.title = newTitle;
+      const currentTask = tasks[currentIndex];
+      currentTask.title = newTitle;
       saveTasks();
 
-      taskItem.innerHTML = buildTaskHTML(task.title);
-      if (task.completed) taskItem.classList.add("completed");
+      taskItem.innerHTML = buildTaskHTML(currentTask.title);
+      if (currentTask.completed) taskItem.classList.add("completed");
       else taskItem.classList.remove("completed");
     });
 
@@ -97,12 +100,22 @@ function handleTaskActions(e) {
   if (e.target.closest(".delete")) {
     tasks.splice(taskIndex, 1);
     saveTasks();
-    renderTasks();
+
+    taskItem.remove();
+
+    const items = taskList.querySelectorAll(".task-item");
+    items.forEach((item, index) => {
+      item.dataset.index = index;
+    });
+
     return;
   }
 
   if (e.target.closest(".title")) {
-    task.completed = !task.completed;
+    const currentIndex = Number(taskItem.dataset.index);
+    const currentTask = tasks[currentIndex];
+
+    currentTask.completed = !currentTask.completed;
     saveTasks();
     taskItem.classList.toggle("completed");
   }
