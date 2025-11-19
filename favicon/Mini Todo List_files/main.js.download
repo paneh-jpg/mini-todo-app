@@ -47,7 +47,19 @@ function Modal() {
 
         if (modalEl) {
           e.preventDefault();
+
           lastFocusedElement = document.activeElement;
+
+          modal.closeModal(modalEl);
+        }
+      }
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        const modalEl = document.querySelector(".modal-backdrop.show");
+        if (modalEl) {
+          e.preventDefault();
           modal.closeModal(modalEl);
         }
       }
@@ -59,6 +71,7 @@ function Modal() {
     modalElement.ontransitionend = () => {
       modalElement.remove();
     };
+    todoInput.focus();
   };
 }
 
@@ -134,14 +147,14 @@ function handleTaskActions(e) {
 
       const newTitle = input.value.trim();
       if (!newTitle) {
-        modal.openModal("Task title cannot be empty.");
+        alert("Task title cannot be empty");
         return;
       }
 
       const currentIndex = Number(taskItem.dataset.index);
 
       if (isDuplicateTask(newTitle, currentIndex)) {
-        modal.openModal("Task is available.");
+        alert("Task is available");
         return;
       }
 
