@@ -82,7 +82,7 @@ function isDuplicateTask(newTitle, excludeIndex = -1) {
 
 function buildTaskHTML(title) {
   return `
-    <span class="title cursor-pointer break-word mr-4">${escapeHTML(
+    <span class="title cursor-pointer select-none break-word mr-4">${escapeHTML(
       title
     )}</span>
     <div class="task-action flex gap-3">
@@ -238,3 +238,7 @@ todoForm.addEventListener("submit", addTask);
 taskList.addEventListener("click", handleTaskActions);
 
 renderTasks();
+
+window.addEventListener("pageshow", function () {
+  todoInput.focus();
+});
